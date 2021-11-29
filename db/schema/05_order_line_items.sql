@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE orderLineItems (
   id SERIAL PRIMARY KEY,
   order_id INT NOT NULL,
