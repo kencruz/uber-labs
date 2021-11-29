@@ -55,8 +55,24 @@ app.use("/api/orderLineItems", orderLineItems(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+// Home page route
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+// Login page route
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// restaurant page route
+app.get("/restaurant", (req, res) => {
+  res.render("restaurant");
+});
+
+// Signup page route
+app.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
 app.listen(PORT, () => {
