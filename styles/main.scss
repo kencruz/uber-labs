@@ -1,6 +1,6 @@
 body {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
 
@@ -16,7 +16,7 @@ body {
   );
 }
 
-main {
+header {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
