@@ -77,6 +77,11 @@ app.get("/restaurant", (req, res) => {
   res.render("restaurant");
 });
 
+// restaurant page route
+app.post("/restaurant", (req, res) => {
+  res.render("restaurant");
+});
+
 // dishes page route
 app.get("/dishes", (req, res) => {
   res.render("dishes");

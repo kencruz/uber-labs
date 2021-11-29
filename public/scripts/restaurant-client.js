@@ -18,6 +18,7 @@ $(document).ready(() => {
   console.log('ready!');
   $.get('/api/restaurants')
     .then(res => {
+
       renderRes(res);
     });
 });
