@@ -1,6 +1,6 @@
 const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) => {
   console.log(dishImg);
-  let html = `<div class="col${dishId}">
+  let html = `<div id=${dishId} class="col">
   <div class="order-item card shadow-sm flex-row">
     <img width="50%" src="/img/${dishImg}">
 
@@ -9,6 +9,13 @@ const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) =>
       <p class="card-text">${dishDescription}</p>
         <small class="text-muted text-end">$${dishPrice}</small>
     </div>
+    <div class="item-footer">
+        <button type="button" class="btn btn-primary" id="modal-btn-decrease-${dishId}">-</button>
+        <label for="order-quantity"></label>
+        <input type="text" class="form-control-${dishId}" name="order-quantity" value="1" style="max-width:40px">
+        <button type="button" class="btn btn-primary" id="modal-btn-increase-${dishId}">+</button>
+        <button type="button" class="btn btn-primary" id="modal-btn-si-${dishId}">ADD TO CART</button>
+      </div>
   </div>
 </div>`;
   return html;
@@ -16,7 +23,23 @@ const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) =>
 
 const renderRes = arr => {
   arr.forEach(e => {
-    $('#item-container').append(createResItem(e.name, e.img, e.price, e.description));
+    $('#item-container').append(createResItem(e.id, e.name, e.img, e.price, e.description));
+
+    $(`#modal-btn-increase-${e.id}`).on('click', () => {
+      let currentVal = $(`.form-control-${e.id}`).val();
+      $(`.form-control-${e.id}`).val(Number(currentVal) + 1);
+    });
+
+    $(`#modal-btn-decrease-${e.id}`).on('click', () => {
+      let currentVal = $(`.form-control-${e.id}`).val();
+      if (currentVal > 0) {
+        $(`.form-control-${e.id}`).val(Number(currentVal) - 1);
+      }
+    });
+    
+    $(`#modal-btn-si-${e.id}`).on('click', () => {
+      console.log("ordering: ", e.name);
+    });
   });
 };
 
@@ -31,25 +54,4 @@ $(document).ready(() => {
     $('#navbarCollapse').on('click',function() {
       $('#navbar').toggleClass('active');
     });
-
-    $(".order-item").on("click", function() {
-      console.log("order this item, open the modal");
-      $("#order-modal").modal('show');
-    });
-
-    $('#modal-btn-increase').on('click', () => {
-      let currentVal = $(".form-control").val();
-      $(".form-control").val(Number(currentVal) + 1);
-    });
-
-    $('#modal-btn-decrease').on('click', () => {
-      let currentVal = $(".form-control").val();
-      if (currentVal > 0) {
-        $(".form-control").val(Number(currentVal) - 1);
-      }
-    });
-
-    $('.close').on('click', () => {
-      $("#order-modal").modal('hide');
-    })
 });
