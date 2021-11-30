@@ -1,8 +1,11 @@
 // Client facing scripts here
-const createResItem = name => {
+const createResItem = (restaurantName, dishName) => {
   let html = `<tr>
+  <th>
+  ${restaurantName}
+  </th>
   <td>
-    ${name}
+    ${dishName}
   </td>
 </tr>`;
   return html;

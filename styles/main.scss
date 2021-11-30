@@ -16,6 +16,12 @@ body {
   );
 }
 
+.index-main-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow:2;
+}
+
 .header-nav {
   display: flex;
   /* flex-wrap: nowrap;
@@ -25,6 +31,8 @@ body {
   overflow-x: auto;
   overflow-y: hidden; */
 }
+
+
 
 #navbar {
     min-width: 250px;
