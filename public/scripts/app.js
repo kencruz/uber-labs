@@ -21,7 +21,13 @@ $(document).ready(() => {
 
       renderRes(res);
     });
+
   $('#navbarCollapse').on('click',function() {
     $('#navbar').toggleClass('active');
+  });
+
+  $(".order-item").on("click", function() {
+    console.log("order this item, open the modal");
+    $("#order-modal").modal('show');
   });
 });
