@@ -1,7 +1,7 @@
 body {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
 
   background: rgb(163, 208, 219);
@@ -16,7 +16,7 @@ body {
   );
 }
 
-header {
+.header-nav {
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -24,4 +24,11 @@ header {
   max-height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
+}
+@media only screen and (min-width: 1280) {
+
+  .g3 {
+    display: flex;
+    flex-direction: column;
+  }
 }
