@@ -25,10 +25,19 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
 }
-@media only screen and (min-width: 1280) {
+@media only screen and (min-width: 1280px) {
 
-  .g3 {
+}
+
+@media only screen and (min-width: 1000px) {
+ /* .row {
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
+
+  .card .shadow-sm .flex-row {
+    width: 100%;
+  }
+  */
 }
