@@ -1,7 +1,6 @@
-// Client facing scripts here
-const createResItem = (dishName, dishImg, dishPrice, dishDescription) => {
+const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) => {
   console.log(dishImg);
-  let html = `<div class="col">
+  let html = `<div class="col${dishId}">
   <div class="order-item card shadow-sm flex-row">
     <img width="50%" src="/img/${dishImg}">
 
@@ -17,7 +16,7 @@ const createResItem = (dishName, dishImg, dishPrice, dishDescription) => {
 
 const renderRes = arr => {
   arr.forEach(e => {
-    $('#restaurant_items').append(createResItem(e.name, e.description));
+    $('#item-container').append(createResItem(e.name, e.img, e.price, e.description));
   });
 };
 
@@ -25,7 +24,12 @@ $(document).ready(() => {
   console.log('ready!');
   $.get('/api/dishes')
     .then(res => {
-      renderRes(res);
+      console.log(res.rows)
+      renderRes(res.rows);
+    });
+
+    $('#navbarCollapse').on('click',function() {
+      $('#navbar').toggleClass('active');
     });
 
     $(".order-item").on("click", function() {

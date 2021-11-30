@@ -63,15 +63,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/", (req, res) => {
-  res.redirect("/orders");
-});
-
-// Login page route
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
 // restaurant page route
 app.get("/restaurant", (req, res) => {
   res.render("restaurant");
@@ -80,21 +71,6 @@ app.get("/restaurant", (req, res) => {
 // restaurant page route
 app.post("/restaurant", (req, res) => {
   res.render("restaurant");
-});
-
-// dishes page route
-app.get("/dishes", (req, res) => {
-  res.render("dishes");
-});
-
-// order page route
-app.get("/orders", (req, res) => {
-  res.render("orders");
-});
-
-// Signup page route
-app.get("/signup", (req, res) => {
-  res.render("signup");
 });
 
 app.listen(PORT, () => {
