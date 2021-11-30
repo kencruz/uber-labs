@@ -21,4 +21,7 @@ $(document).ready(() => {
 
       renderRes(res);
     });
+  $('#navbarCollapse').on('click',function() {
+    $('#navbar').toggleClass('active');
+  });
 });

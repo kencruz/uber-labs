@@ -1,7 +1,7 @@
 body {
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
   min-height: 100vh;
 
   background: rgb(163, 208, 219);
@@ -18,13 +18,91 @@ body {
 
 .header-nav {
   display: flex;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap;
   justify-content: flex-start;
   height: 100vh;
   max-height: 100vh;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: hidden; */
 }
+
+#navbar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.5s;
+}
+
+#navbar.active {
+    min-width: 80px;
+    max-width: 80px;
+    text-align: center;
+}
+
+#navbar.active .navbar-header h3, #navbar.active ul li a span {
+    display: none;
+}
+
+#navbar.active .navbar-header strong {
+    display: block;
+}
+
+#navbar ul li a {
+    text-align: left;
+}
+
+#navbar.active ul li a {
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+#navbar.active ul li a i {
+    margin-right:  0;
+    display: block;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+}
+
+#navbar.active ul ul a {
+    padding: 10px !important;
+}
+
+#navbar .navbar-header {
+    padding: 20px;
+    /*background: #6d7fcc;*/
+}
+
+#navbar .navbar-header strong {
+    display: none;
+    font-size: 1.8em;
+}
+
+#navbar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #404040;
+}
+
+#navbar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: #fff;
+}
+#navbar ul li a:hover {
+    background: #fff;
+    color: #000;
+}
+#navbar ul li a i {
+    margin-right: 10px;
+}
+
+#navbar ul li.active > a {
+    color: #fff;
+    background: #6d7fcc;
+}
+
 @media only screen and (min-width: 1280px) {
 
 }
