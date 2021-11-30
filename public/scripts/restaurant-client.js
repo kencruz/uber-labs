@@ -7,7 +7,7 @@ const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) =>
     <div class="card-body d-flex flex-column">
       <h3 class="card-title">${dishName}</h3>
       <p class="card-text">${dishDescription}</p>
-        <small class="text-muted text-end">$${dishPrice}</small>
+        <small class="text-muted text-end">$${dishPrice / 100}</small>
     </div>
     <div class="item-footer">
         <button type="button" class="btn btn-primary" id="modal-btn-decrease-${dishId}">-</button>
@@ -23,7 +23,7 @@ const createResItem = (dishId, dishName, dishImg, dishPrice, dishDescription) =>
 
 const renderRes = arr => {
   arr.forEach(e => {
-    $('#item-container').append(createResItem(e.id, e.name, e.img, e.price, e.description));
+    $('#item-container-page').append(createResItem(e.id, e.name, e.img, e.price, e.description));
 
     $(`#modal-btn-increase-${e.id}`).on('click', () => {
       let currentVal = $(`.form-control-${e.id}`).val();
@@ -36,7 +36,7 @@ const renderRes = arr => {
         $(`.form-control-${e.id}`).val(Number(currentVal) - 1);
       }
     });
-    
+
     $(`#modal-btn-si-${e.id}`).on('click', () => {
       console.log("ordering: ", e.name);
     });
@@ -47,11 +47,11 @@ $(document).ready(() => {
   console.log('ready!');
   $.get('/api/dishes')
     .then(res => {
-      console.log(res.rows)
+      console.log(res.rows);
       renderRes(res.rows);
     });
 
-    $('#navbarCollapse').on('click',function() {
-      $('#navbar').toggleClass('active');
-    });
+  $('#navbarCollapse').on('click', function() {
+    $('#navbar').toggleClass('active');
+  });
 });
