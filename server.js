@@ -65,7 +65,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   res.redirect("/orders");
-})
+});
 
 // Login page route
 app.get("/login", (req, res) => {
