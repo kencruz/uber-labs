@@ -48,7 +48,7 @@ body {
     text-align: center;
 }
 
-#navbar.active .navbar-header h3, #navbar.active ul li a span {
+#navbar.active .navbar-header h3, #navbar.active ul li a span.title {
     display: none;
 }
 
@@ -110,6 +110,14 @@ body {
 #navbar ul li.active > a {
     color: #fff;
     background: #6d7fcc;
+}
+
+.fa-shopping-cart {
+  position: relative;
+}
+
+#cart-counter {
+  font-size: 5px;
 }
 
 @media only screen and (min-width: 1280px) {
