@@ -7,6 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -21,6 +22,14 @@ const objExtractor = require("./helpers/extractor");
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
+
+// set up middleware to use encrypted cookies
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['break this plz', "actually don't, be nice"],
+  })
+);
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -60,7 +69,23 @@ app.use("/api/orderLineItems", orderLineItems(db));
 
 // Home page route
 app.get("/", (req, res) => {
-  res.render("index");
+  // Look for an orderId cookie
+  if (!req.session.orderId) {
+    console.log("making new orderId");
+    db.query(`INSERT INTO restaurant_order (user_id, is_ready) VALUES (1, FALSE) RETURNING id;`)
+      .then(data => {
+        const orderId = data.rows[0].id;
+        req.session.orderId = orderId;
+        console.log("orderId: ", req.session.orderId);
+        res.render("index");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  } else {
+    console.log("orderId: ", req.session.orderId);
+    res.render("index");
+  }
 });
 
 // restaurant page route
