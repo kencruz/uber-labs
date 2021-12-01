@@ -7,7 +7,7 @@ const getCart = (db) => {
   router.get("/", (req, res) => {
     const orderId  = req.session.orderId;
     console.log("should get cart at orderID: ", orderId);
-    db.query(`SELECT dishes.name, dishes.description, dishes.img, dishes.price, SUM(orderLineItems.quantity) as quantity
+    db.query(`SELECT dishes.id, dishes.name, dishes.description, dishes.img, dishes.price, SUM(orderLineItems.quantity) as quantity
 FROM orderLineItems
 JOIN dishes ON orderLineItems.item_id = dishes.id
 WHERE orderLineItems.order_id = ${orderId}

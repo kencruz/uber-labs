@@ -17,8 +17,34 @@ const renderRes = arr => {
   });
 };
 
+const createCheckOutItem = (dishId, dishName, dishImg, dishPrice, dishDescription, dishQuantity) => {
+  const price = dishPrice * dishQuantity / 100;
+
+  let html = `<div id=${dishId} class="col">
+  <div class="order-item card shadow-sm flex-row">
+    <img width="50%" src="/img/${dishImg}">
+
+    <div class="card-body d-flex flex-column">
+      <h3 class="card-title">${dishName} X${dishQuantity}</h3>
+      <p class="card-text">${dishDescription}</p>
+        <small class="text-muted text-end">$${price}</small>
+    </div>
+  </div>
+</div>`;
+  return html;
+};
+
 $(document).ready(() => {
   console.log('ready!');
+
+  // Get cart information
+  $.get('api/cart')
+    .then((data) => {
+      console.log('cart info', data);
+      $('#item-container').html('');
+      data.forEach(e => $('#item-container').append(createCheckOutItem(e.id, e.name, e.img, e.price, e.description, e.quantity)));
+    });
+
   $.get('/api/restaurants')
     .then(res => {
 
