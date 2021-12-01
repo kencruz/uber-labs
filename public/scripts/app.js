@@ -11,14 +11,21 @@ const createResItem = (restaurantName, dishName) => {
   return html;
 };
 
-const renderRes = arr => {
-  arr.forEach(e => {
-    $('#exampleTable').append(createResItem(e.name));
+const renderRes = (arr) => {
+  arr.forEach((e) => {
+    $("#exampleTable").append(createResItem(e.name));
   });
 };
 
-const createCheckOutItem = (dishId, dishName, dishImg, dishPrice, dishDescription, dishQuantity) => {
-  const price = dishPrice * dishQuantity / 100;
+const createCheckOutItem = (
+  dishId,
+  dishName,
+  dishImg,
+  dishPrice,
+  dishDescription,
+  dishQuantity
+) => {
+  const price = (dishPrice * dishQuantity) / 100;
 
   let html = `<div id=${dishId} class="col">
   <div class="order-item card shadow-sm flex-row">
@@ -35,23 +42,41 @@ const createCheckOutItem = (dishId, dishName, dishImg, dishPrice, dishDescriptio
 };
 
 $(document).ready(() => {
-  console.log('ready!');
+  let subtotal = 0;
 
   // Get cart information
-  $.get('api/cart')
-    .then((data) => {
-      console.log('cart info', data);
-      $('#item-container').html('');
-      data.forEach(e => $('#item-container').append(createCheckOutItem(e.id, e.name, e.img, e.price, e.description, e.quantity)));
+  $.get("api/cart").then((data) => {
+    console.log("cart info", data);
+    $("#item-container").html("");
+    data.forEach((e) => {
+      $("#item-container").append(
+        createCheckOutItem(
+          e.id,
+          e.name,
+          e.img,
+          e.price,
+          e.description,
+          e.quantity
+        )
+      );
+
+      const price = (e.price * e.quantity) / 100;
+
+      subtotal += price;
+      $(".cart-subtotal").html(subtotal);
+
+      const tax = Number(subtotal) * 0.13;
+      $(".cart-tax").html(tax.toFixed(2));
+
+      const total = Number(subtotal + tax);
+      $(".cart-total").html(total.toFixed(2));
     });
+  });
+  $.get("/api/restaurants").then((res) => {
+    renderRes(res);
+  });
 
-  $.get('/api/restaurants')
-    .then(res => {
-
-      renderRes(res);
-    });
-
-  $('#navbarCollapse').on('click',function() {
-    $('#navbar').toggleClass('active');
+  $("#navbarCollapse").on("click", function () {
+    $("#navbar").toggleClass("active");
   });
 });

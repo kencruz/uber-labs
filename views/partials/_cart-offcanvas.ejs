@@ -1,0 +1,26 @@
+<div
+  class="offcanvas offcanvas-end"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Current Order</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <h5 class="mb-5">Your Items</h5>
+    <div id="item-container" class="row row-cols-1 g-3"></div>
+    <p>Subtotal: <span class="cart-subtotal"></span></p>
+    <p>Tax: <span class="cart-tax"></span></p>
+    <p>
+      <strong>Total: <span class="cart-total"></span></strong>
+    </p>
+    <button class="btn btn-dark">Check out</button>
+  </div>
+</div>

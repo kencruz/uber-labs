@@ -103,7 +103,8 @@ app.post("/restaurant", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-
+  delete req.session.orderId;
+  res.redirect("/");
 });
 
 app.listen(PORT, () => {
