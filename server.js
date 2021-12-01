@@ -51,7 +51,7 @@ const usersRoutes       = require("./routes/users");
 const restaurantsRoutes = require("./routes/restaurants");
 const dishesRoutes      = require("./routes/dishes");
 const ordersRoutes      = require("./routes/orders");
-const orderLineItems    = require("./routes/orderLineItems");
+const {addOrderLineItem, getAllOrderLineItems}    = require("./routes/orderLineItems");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -59,7 +59,8 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/restaurants", restaurantsRoutes(db));
 app.use("/api/dishes", dishesRoutes(db));
 app.use("/api/orders", ordersRoutes(db));
-app.use("/api/orderLineItems", orderLineItems(db));
+app.use("/api/orderLineItems", getAllOrderLineItems(db));
+app.use("/api/orderLineItems", addOrderLineItem(db));
 
 // Note: mount other resources here, using the same pattern above
 
