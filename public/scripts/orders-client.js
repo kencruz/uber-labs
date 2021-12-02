@@ -38,10 +38,11 @@ const renderResCheckout = (arr) => {
         .then((data) => {
           console.log(data);
           // update the order cart
+          let subtotal = 0;
           $.get("api/cart").then((data) => {
             console.log("cart info", data);
             $("#item-container").html("");
-            data.forEach((e) =>
+            data.forEach((e) => {
               $("#item-container").append(
                 createResItemCheckOut(
                   e.id,
@@ -51,23 +52,24 @@ const renderResCheckout = (arr) => {
                   e.description,
                   e.quantity
                 )
-              )
-            );
+              );
+
+              const price = (e.price * e.quantity) / 100;
+
+              subtotal += price;
+              $(".cart-subtotal").html(subtotal);
+
+              const tax = Number(subtotal) * 0.13;
+              $(".cart-tax").html(tax.toFixed(2));
+
+              const total = Number(subtotal + tax);
+              $(".cart-total").html(total.toFixed(2));
+
+            });
           });
         })
         .catch((err) => console.log(err));
 
-      const value = $(`.form-control-${e.id}`).val();
-      const price = (e.price * Number(value)) / 100;
-
-      subtotal += price;
-      $(".cart-subtotal").html(subtotal);
-
-      const tax = Number(subtotal) * 0.13;
-      $(".cart-tax").html(tax.toFixed(2));
-
-      const total = Number(subtotal + tax);
-      $(".cart-total").html(total.toFixed(2));
 
       $(`.form-control-${e.id}`).val(1);
     });
