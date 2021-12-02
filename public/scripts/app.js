@@ -28,7 +28,6 @@ $(document).ready(() => {
 
   // Get cart information
   $.get("api/cart").then((data) => {
-    console.log("cart info", data);
     $("#item-container").html("");
     data.forEach((e) => {
       $("#item-container").append(
@@ -45,7 +44,7 @@ $(document).ready(() => {
       const price = (e.price * e.quantity) / 100;
 
       subtotal += price;
-      $(".cart-subtotal").html(subtotal);
+      $(".cart-subtotal").html(subtotal.toFixed(2));
 
       const tax = Number(subtotal) * 0.13;
       $(".cart-tax").html(tax.toFixed(2));
@@ -54,9 +53,6 @@ $(document).ready(() => {
       $(".cart-total").html(total.toFixed(2));
     });
   });
-  //$.get("/api/restaurants").then((res) => {
-  //  renderRes(res);
-  //});
 
   $("#navbarCollapse").on("click", function() {
     $("#navbar").toggleClass("active");

@@ -26,8 +26,8 @@ app.use(morgan("dev"));
 // set up middleware to use encrypted cookies
 app.use(
   cookieSession({
-    name: 'session',
-    keys: ['break this plz', "actually don't, be nice"],
+    name: process.env.SESSION_NAME,
+    keys: [process.env.SESSION_KEY, process.env.SESSION_KEY2],
   })
 );
 
