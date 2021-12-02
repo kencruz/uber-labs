@@ -1,9 +1,17 @@
 # Uber Labs
 
 ## Table of content
-* [Styles] (/styles)
-* [Data Base] (/db)
-  *[Schemas] (/db/schema)
+* [Styles](./styles)
+* [Data Base](/db)
+  * [Schemas](/db/schema)
+  * [Seeds](/db/seeds)
+* [Images used in the project](/public/img)
+* [API Routes](/routes)
+* [Styling](/styles)
+* [HTML Pages](/views)
+  * [Navigation Bar](/views/partials)
+  * [Cart Offcanvas Page](/views/partials)
+  * [Footer](/views/partials)
 
 ## Getting Started
 
@@ -33,6 +41,13 @@
 - Use the `npm run db:reset` command each time there is a change to the database schema or seeds. 
   - It runs through each of the files, in order, and executes them against the database. 
   - Note: you will lose all newly created (test) data each time this is run, since the schema files will tend to `DROP` the tables and recreate them.
+
+## Final Product
+
+!["Screenshot of the Homepage page"](https://i.imgur.com/lL6SX1E.png)
+!["Screenshot of the Restaurant page"](https://i.imgur.com/bhIZ7yH.png)
+!["Screenshot of the Checkout Ofcanvas"](https://i.imgur.com/yrOuJFi.png)
+!["Screenshot of the Navbar"](https://i.imgur.com/nvAPWFU.png)
 
 ## Dependencies
 
