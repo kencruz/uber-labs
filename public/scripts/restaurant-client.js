@@ -18,7 +18,7 @@ const createResItem = (
     <div class="cart-icon-${dishId}" style="padding: 10px">
       <button class="cart-btn-dishes-${dishId}" style="border: none; background: none;"><i class="fas fa-shopping-cart"></i></button>
     </div>
-    <div class="item-footer-${dishId}" style="display:none;">
+    <div class="food-item-order-panel item-footer-${dishId}" style="display:none;">
         <button type="button" class="shadow btn btn-light" id="modal-btn-decrease-${dishId}">-</button>
         <label for="order-quantity"></label>
         <input type="text" class="form-control-${dishId}" name="order-quantity" value="1" style="max-width:40px">
