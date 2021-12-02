@@ -74,8 +74,32 @@ const renderResCheckout = (arr) => {
   });
 };
 
+// will check the order status every second until order is ready;
+const checkoutUpdate = () => {
+  $.get('api/orders/status')
+    .then(order => {
+      console.log(order);
+      if (!order.is_ready) {
+        console.log("order not ready yet");
+        return setTimeout(() => {
+          checkoutUpdate();
+        }, 1000);
+      }
+      console.log(`Order #${order.id} is now ready to pick up!`);
+    })
+    .catch(err => console.log(err));
+};
+
 $(document).ready(() => {
   $.get("/api/dishes").then((res) => {
     renderResCheckout(res.rows);
   });
+
+
+  $('#order-checkout-button').on("click", () => {
+    console.log("sending order to restaurant");
+    $.post('api/orders');
+    checkoutUpdate();
+  });
+
 });

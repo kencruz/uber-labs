@@ -21,17 +21,24 @@ const getOrders = (db) => {
 const sendOrder = (db) => {
   router.post("/", (req, res) => {
     const orderId  = req.session.orderId;
-
-    // this will simulate a restaurant receiving an order and make it ready in
-    // 5 seconds
-    setTimeout(
+    const readyOrder = () => {
       db.query(`UPDATE restaurant_order
         SET is_ready = TRUE 
         WHERE id = ${orderId};`)
         .catch(err => {
           console.log(err);
-        }),
-      5000
+        });
+    };
+
+    // this will simulate a restaurant receiving an order and make it ready in
+    // 5 seconds
+    setTimeout(() => {
+      readyOrder();
+
+      // We can implement the SMS text message functionality below this comment
+
+    },
+    5000
     );
   });
   return router;
@@ -44,7 +51,8 @@ const getOrderStatus = (db) => {
     db.query(`SELECT * FROM restaurant_order WHERE id = ${orderId};`)
       .then(data => {
         const restaurantOrder = data.rows[0];
-        res.json({ restaurantOrder });
+        console.log(data);
+        res.json(restaurantOrder);
       })
       .catch(err => {
         console.log(err);
