@@ -86,8 +86,23 @@ const checkoutUpdate = () => {
         }, 1000);
       }
       console.log(`Order #${order.id} is now ready to pick up!`);
+      $('#cart-body').html(foodReadyToPickUpElement(order.id));
     })
     .catch(err => console.log(err));
+};
+
+const cartLoadingSpinner = `
+<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+  <h2>Restaurant received your order and is now cooking!</h2>
+  `;
+
+const foodReadyToPickUpElement = (orderId) => {
+  return `
+  <i class="fas fa-shopping-bag fa-10x"></i>
+  <h2>Restaurant finished your order (#${orderId}) and is ready to pick up!</h2>
+    `;
 };
 
 $(document).ready(() => {
@@ -99,6 +114,7 @@ $(document).ready(() => {
   $('#order-checkout-button').on("click", () => {
     console.log("sending order to restaurant");
     $.post('api/orders');
+    $('#cart-body').html(cartLoadingSpinner);
     checkoutUpdate();
   });
 
