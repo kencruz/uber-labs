@@ -13,7 +13,7 @@ const createResItemCheckOut = (
     <img width="50%" src="/img/${dishImg}">
 
     <div class="card-body d-flex flex-column">
-      <h3 class="card-title">${dishName} X${dishQuantity}</h3>
+      <h3 class="card-title">${dishName} <i class="fas fa-times fa-sm"></i>${dishQuantity}</h3>
       <p class="card-text">${dishDescription}</p>
         <small class="text-muted text-end">$${price}</small>
     </div>
