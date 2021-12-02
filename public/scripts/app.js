@@ -1,22 +1,4 @@
 // Client facing scripts here
-const createResItem = (restaurantName, dishName) => {
-  let html = `<tr>
-  <th>
-  ${restaurantName}
-  </th>
-  <td>
-    ${dishName}
-  </td>
-</tr>`;
-  return html;
-};
-
-const renderRes = (arr) => {
-  arr.forEach((e) => {
-    $("#exampleTable").append(createResItem(e.name));
-  });
-};
-
 const createCheckOutItem = (
   dishId,
   dishName,
@@ -72,11 +54,12 @@ $(document).ready(() => {
       $(".cart-total").html(total.toFixed(2));
     });
   });
-  $.get("/api/restaurants").then((res) => {
-    renderRes(res);
-  });
+  //$.get("/api/restaurants").then((res) => {
+  //  renderRes(res);
+  //});
 
-  $("#navbarCollapse").on("click", function () {
+  $("#navbarCollapse").on("click", function() {
+    console.log("CLICK CLICK");
     $("#navbar").toggleClass("active");
   });
 });

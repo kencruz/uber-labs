@@ -15,12 +15,14 @@
   </div>
   <div class="offcanvas-body">
     <h5 class="mb-5">Your Items</h5>
+    <!-- TODO: HIDE ORDER TOTALS AND CHECKOUT BUTTON UNTIL AN ITEM IS ORDERED
+ -->
     <div id="item-container" class="row row-cols-1 g-3"></div>
     <p>Subtotal: <span class="cart-subtotal"></span></p>
     <p>Tax: <span class="cart-tax"></span></p>
     <p>
       <strong>Total: <span class="cart-total"></span></strong>
     </p>
-    <button class="btn btn-dark">Check out</button>
+    <button id="order-checkout-button" class="btn btn-dark">Check out</button>
   </div>
 </div>

@@ -36,7 +36,13 @@
   <body>
     <%- include('partials/_navbar') %>
     <main class="container-fluid">
-      <div class="position-relative p-3 p-md-5 mb-5 text-center bg-light">
+      <div class="position-relative p-3 p-md-5 mb-5 text-center hero-section">
+        <!-- The video -->
+        <div class="vid-content">
+          <video autoplay muted loop id="myVideo" width="100%">
+            <source src="videos/cooking.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div class="col-md-5 p-lg-5 mx-auto my-5">
           <h1 class="display-4 font-weight-normal">We love skipping lines</h1>
           <p class="lead font-weight-normal">
@@ -52,8 +58,8 @@
       <section class="featured-restaurant mb-5">
         <a href="/restaurant">
           <header class="container">
-            <h1>Daily Grill</h1>
-            <h3>1234 Yukon Mount Ave</h3>
+            <h2>Daily Grill</h2>
+            <h4>1234 Yukon Mount Ave</h4>
           </header>
           <div
             id="daily-grill-slider"

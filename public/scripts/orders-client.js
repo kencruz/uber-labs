@@ -26,6 +26,7 @@ const renderResCheckout = (arr) => {
   let subtotal = 0;
 
   arr.forEach((e) => {
+    // ADD TO ORDER BUTTON
     $(`#modal-btn-si-${e.id}`).on("click", () => {
       // Get the item_id and quantity from the form
       const itemId = e.id;
