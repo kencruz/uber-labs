@@ -76,7 +76,7 @@ const renderResCheckout = (arr) => {
   });
 };
 
-// will check the order status every second until order is ready;
+// Check the order status every second until order is ready;
 const checkoutUpdate = () => {
   $.get('api/orders/status')
     .then(order => {
@@ -112,7 +112,7 @@ $(document).ready(() => {
     renderResCheckout(res.rows);
   });
 
-
+  // Submit the order and send to restaurant
   $('#order-checkout-button').on("click", () => {
     console.log("sending order to restaurant");
     $.post('api/orders');
