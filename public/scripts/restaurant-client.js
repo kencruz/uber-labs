@@ -13,17 +13,17 @@ const createResItem = (
     <div id="food-menu-content-${dishId}" class="card-body d-flex flex-column">
       <h3 class="card-title">${dishName}</h3>
       <p class="card-text">${dishDescription}</p>
-        <small class="text-muted text-end">$${dishPrice / 100}</small>
+        <small class="text-muted text-end price-text">$${dishPrice / 100}</small>
     </div>
-    <div class="cart-icon-${dishId}" style="padding: 10px">
+    <div class="cart-icon-${dishId} cart-icon-container" style="padding: 10px">
       <button class="cart-btn-dishes-${dishId}" style="border: none; background: none;"><i class="fas fa-shopping-cart"></i></button>
     </div>
     <div class="food-item-order-panel item-footer-${dishId}" style="display:none;">
-        <button type="button" class="shadow btn btn-light" id="modal-btn-decrease-${dishId}">-</button>
+        <button type="button" class="shadow btn btn-light btn-sm" id="modal-btn-decrease-${dishId}">-</button>
         <label for="order-quantity"></label>
-        <input type="text" class="form-control-${dishId}" name="order-quantity" value="1" style="max-width:40px">
-        <button type="button" class="shadow btn btn-light" id="modal-btn-increase-${dishId}">+</button>
-        <button type="button" class="shadow btn btn-light" id="modal-btn-si-${dishId}">ADD TO CART</button>
+        <input type="text" class="form-control-${dishId}" name="order-quantity" value="1" style="max-width:25px">
+        <button type="button" class="shadow btn btn-light btn-sm" id="modal-btn-increase-${dishId}">+</button>
+        <button type="button" class="shadow btn btn-light btn-sm" id="modal-btn-si-${dishId}">ADD TO CART</button>
       </div>
   </div>
 </div>

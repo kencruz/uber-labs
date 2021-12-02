@@ -106,8 +106,6 @@ body {
   z-index: 999;
 }
 
-@media (max-width: 767px) { 
-}
 /*#logout-button {
      display: none;
  }*/
@@ -119,6 +117,11 @@ body {
 .order-item img {
   object-fit: cover;
   width: 150px;
+}
+@media (max-width: 767px) { 
+  .order-item img {
+    width: 130px;
+  }
 }
 
 @media (max-width: 1023px) {
