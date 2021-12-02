@@ -23,8 +23,6 @@ const createResItemCheckOut = (
 };
 
 const renderResCheckout = (arr) => {
-  let subtotal = 0;
-
   arr.forEach((e) => {
     // ADD TO ORDER BUTTON
     $(`#modal-btn-si-${e.id}`).on("click", () => {
@@ -36,11 +34,9 @@ const renderResCheckout = (arr) => {
       // with the body: {itemId, quantity}
       $.post("api/orderLineItems/new", { itemId, quantity })
         .then((data) => {
-          console.log(data);
           // update the order cart
           let subtotal = 0;
           $.get("api/cart").then((data) => {
-            console.log("cart info", data);
             $("#item-container").html("");
             data.forEach((e) => {
               $("#item-container").append(
@@ -57,7 +53,7 @@ const renderResCheckout = (arr) => {
               const price = (e.price * e.quantity) / 100;
 
               subtotal += price;
-              $(".cart-subtotal").html(subtotal);
+              $(".cart-subtotal").html(subtotal.toFixed(2));
 
               const tax = Number(subtotal) * 0.13;
               $(".cart-tax").html(tax.toFixed(2));
@@ -68,8 +64,7 @@ const renderResCheckout = (arr) => {
             });
           });
         })
-        .catch((err) => console.log(err));
-
+        .catch((err) => console.log(err.message));
 
       $(`.form-control-${e.id}`).val(1);
     });
@@ -80,17 +75,14 @@ const renderResCheckout = (arr) => {
 const checkoutUpdate = () => {
   $.get('api/orders/status')
     .then(order => {
-      console.log(order);
       if (!order.is_ready) {
-        console.log("order not ready yet");
         return setTimeout(() => {
           checkoutUpdate();
         }, 1000);
       }
-      console.log(`Order #${order.id} is now ready to pick up!`);
       $('#cart-body').html(foodReadyToPickUpElement(order.id));
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err.message));
 };
 
 const cartLoadingSpinner = `
@@ -114,7 +106,6 @@ $(document).ready(() => {
 
   // Submit the order and send to restaurant
   $('#order-checkout-button').on("click", () => {
-    console.log("sending order to restaurant");
     $.post('api/orders');
     $('#cart-body').html(cartLoadingSpinner);
     checkoutUpdate();
