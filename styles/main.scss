@@ -105,6 +105,15 @@ body {
      display: none;
  }*/
 
+.order-item {
+  height: 150px;
+}
+
+.order-item img {
+  object-fit: cover;
+  width: 150px;
+}
+
 @media only screen and (min-width: 1280px) {
 }
 
