@@ -10,7 +10,7 @@ const createResItem = (
   <div class="order-item card shadow-sm flex-row">
     <img width="50%" src="/img/${dishImg}">
 
-    <div class="card-body d-flex flex-column">
+    <div id="food-menu-content-${dishId}" class="card-body d-flex flex-column">
       <h3 class="card-title">${dishName}</h3>
       <p class="card-text">${dishDescription}</p>
         <small class="text-muted text-end">$${dishPrice / 100}</small>
@@ -73,11 +73,15 @@ const renderRes = (arr) => {
     $(`.cart-btn-dishes-${e.id}`).on("click", () => {
       $(`.item-footer-${e.id}`).removeAttr("style");
       $(`.cart-icon-${e.id}`).css("display", "none");
+      $(`#food-menu-content-${e.id}`).css("display", "none");
+      $(`#food-menu-content-${e.id}`).removeClass("d-flex");
     });
     // close the order panel once clicked "add to order"
     $(`#modal-btn-si-${e.id}`).on("click", () => {
       $(`.item-footer-${e.id}`).css("display", "none");
       $(`.cart-icon-${e.id}`).css("display", "initial");
+      $(`#food-menu-content-${e.id}`).css("display", "initial");
+      $(`#food-menu-content-${e.id}`).addClass("d-flex");
       $(`#liveToast-${e.id}`).fadeIn(600);
       setTimeout(() => {
         $(`#liveToast-${e.id}`).fadeOut(600);
