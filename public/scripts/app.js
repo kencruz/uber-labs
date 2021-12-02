@@ -57,4 +57,7 @@ $(document).ready(() => {
   $("#navbarCollapse").on("click", function() {
     $("#navbar").toggleClass("active");
   });
+  $("#navbarCollapseMobile").on("click", function() {
+    $("#navbar").toggleClass("active");
+  });
 });
