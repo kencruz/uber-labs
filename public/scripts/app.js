@@ -59,7 +59,6 @@ $(document).ready(() => {
   //});
 
   $("#navbarCollapse").on("click", function() {
-    console.log("CLICK CLICK");
     $("#navbar").toggleClass("active");
   });
 });

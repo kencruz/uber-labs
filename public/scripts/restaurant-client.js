@@ -94,7 +94,4 @@ $(document).ready(() => {
   $.get("/api/dishes").then((res) => {
     renderRes(res.rows);
   });
-  $("#navbarCollapse").on("click", function () {
-    $("#navbar").toggleClass("active");
-  });
 });
