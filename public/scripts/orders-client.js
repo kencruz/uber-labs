@@ -75,12 +75,17 @@ const renderResCheckout = (arr) => {
 const checkoutUpdate = () => {
   $.get('api/orders/status')
     .then(order => {
+      if (order.estimated_time) {
+        $('#cart-order-status-message').html(`Restaurant is now cooking your order (#${order.id})! Estimated time for pick up in ${order.estimated_time} minutes!`);
+      }
       if (!order.is_ready) {
         return setTimeout(() => {
           checkoutUpdate();
         }, 1000);
       }
       $('#cart-body').html(foodReadyToPickUpElement(order.id));
+      //clear the cookies
+      $.get('/logout');
     })
     .catch(err => console.log(err.message));
 };
@@ -89,13 +94,13 @@ const cartLoadingSpinner = `
 <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
   <span class="sr-only">Loading...</span>
 </div>
-  <h2>Restaurant received your order and is now cooking!</h2>
+  <h2 id="cart-order-status-message">Sending order to kitchen!</h2>
   `;
 
 const foodReadyToPickUpElement = (orderId) => {
   return `
   <i class="fas fa-shopping-bag fa-10x"></i>
-  <h2>Restaurant finished your order (#${orderId}) and is ready to pick up!</h2>
+  <h2 id="cart-order-status-message">Restaurant finished your order (#${orderId}) and is ready to pick up!</h2>
     `;
 };
 
