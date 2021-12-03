@@ -43,17 +43,17 @@ const sendOrder = (db) => {
         const restaurantNumber = data.rows[0].restaurant_number;
         const customerNumber = data.rows[0].customer_number;
         // SMS order has been placed
-        sendMessage(restaurantNumber, `An order (${orderId}) has been placed.`);
-        sendMessage(customerNumber, `Hey ${data.rows[0].customer_name}, Your order (${orderId}) has been placed.`);
+        // sendMessage(restaurantNumber, `An order (${orderId}) has been placed.`);
+        // sendMessage(customerNumber, `Hey ${data.rows[0].customer_name}, Your order (${orderId}) has been placed.`);
 
         // this will simulate a restaurant receiving an order and make it ready in
         // 5 seconds
         setTimeout(() => {
           readyOrder();
           // We can implement the SMS text message for when order is ready
-          sendMessage(customerNumber, `Hey ${data.rows[0].customer_name}, Your order (${orderId}) is ready. Thank you for ordering!`);
+          // sendMessage(customerNumber, `Hey ${data.rows[0].customer_name}, Your order (${orderId}) is ready. Thank you for ordering!`);
         },
-          5000
+        5000
         );
       })
       .catch(err => console.log(err.message));

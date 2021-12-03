@@ -8,6 +8,8 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cookieSession = require('cookie-session');
+// SMS text messaging
+const sendMessage = require('./send_sms');
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -104,6 +106,64 @@ app.post("/restaurant", (req, res) => {
 app.get("/logout", (req, res) => {
   delete req.session.orderId;
   res.redirect("/");
+});
+
+app.get("/admin", (req, res) => {
+  db.query("SELECT * FROM restaurant_order WHERE restaurant_id = 1 ORDER BY restaurant_order.id;")
+    .then(data => {
+      const orders = data.rows;
+      //res.json({orders});
+      res.render("admin", {orders});
+    }).catch(err => res.status(400).send(err));
+});
+
+app.post("/ready/:id", (req, res) => {
+  const orderId = req.params.id;
+  console.log(req.body, req.params);
+  db.query(`UPDATE restaurant_order
+    SET is_ready = TRUE 
+    WHERE id = ${orderId};`).then(() => {
+
+    // notify customer of order through text
+    db.query(`SELECT 
+          users.name as customer_name,
+          users.phone_number as customer_number,
+          restaurant.phone_number as restaurant_number
+          FROM users
+          JOIN restaurant_order ON user_id = users.id
+          JOIN restaurant ON restaurant.id = restaurant_id
+          WHERE restaurant_order.id = ${orderId}`)
+      .then(data => {
+        const restaurantNumber = data.rows[0].restaurant_number;
+        const customerNumber = data.rows[0].customer_number;
+
+        // sendMessage(customerNumber, `Hey ${data.rows[0].customer_name}, Your order (${orderId}) is ready. Thank you for ordering!`);
+      }
+      ).catch(err => console.log("error texting to customer on order ready: ", err.message));
+      
+    // notify customer text END
+
+    res.redirect("/admin");
+  }
+  )
+    .catch(err => {
+      console.log(err.message);
+      res.redirect("/admin");
+    });
+});
+
+app.post("/estimate-time/:id", (req, res) => {
+  const orderId = req.params.id;
+  const estimatedTime = req.body['est-time'];
+  console.log(orderId, estimatedTime);
+  db.query(`UPDATE restaurant_order
+    SET estimated_time = ${estimatedTime} 
+    WHERE id = ${orderId};`).then(() => {
+    res.redirect("/admin");
+  }).catch(err => {
+    console.log(err.message);
+    res.redirect("/admin");
+  });
 });
 
 app.listen(PORT, () => {
